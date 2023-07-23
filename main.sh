@@ -99,6 +99,9 @@ sudo apt install openssl -y
 sudo apt install qemu -y
 sudo apt install tor torbrowser-launcher -y
 sudp apt install lynis -y
+sudo apt install make -y
+sudo apt install ruby-full -y
+sudo apt install rustc -y
 
 
 #vs code / vs codium
@@ -133,9 +136,12 @@ install_vs() {
 
 #ghidra
 install_ghidra() {
-    echo Download ghidra from https://github.com/NationalSecurityAgency/ghidra/releases
-    echo Enter path to downloaded file or leave empty to skip ghidra installation...
-    read path
+    #echo Download ghidra from https://github.com/NationalSecurityAgency/ghidra/releases
+    #echo Enter path to downloaded file or leave empty to skip ghidra installation...
+    #read path
+    
+    wget -O ~/Downloads/ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.3.2_build/ghidra_10.3.2_PUBLIC_20230711.zip
+    path=~/Downloads/ghidra.zip
 
     ghidra_folder="ghidra_10.3.2_PUBLIC"
 
@@ -144,7 +150,7 @@ install_ghidra() {
 
     elif [ -e $path ]; then
         sudo unzip $path -d /usr/share
-        sudo mv $ghidra_folder ghidra
+        sudo mv /usr/share/$ghidra_folder /usr/share/ghidra
 
     else
         echo Invalid path!
@@ -154,7 +160,15 @@ install_ghidra() {
 }
 
 
+#dependecies
+sudo npm install ts-node -g
+sudo npm install pkg -g
+
+pip3 install -r files/req3.txt
+pip install -r files/req.txt
+
+
+
 #finish
 sudo apt update
 sudo apt full-upgrade -y
-
