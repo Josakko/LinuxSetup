@@ -102,6 +102,9 @@ sudp apt install lynis -y
 sudo apt install make -y
 sudo apt install ruby-full -y
 sudo apt install rustc -y
+sudo apt install apt-listbugs -y
+sudo apt install apt-listchanges -y
+sudo apt install apt-show-versions -y
 
 
 #vs code / vs codium
@@ -169,6 +172,40 @@ pip install -r files/req.txt
 
 
 #security
+disable_usb() {
+    echo "Disable USB driver [Y/n]?"
+    read usb_choice
+
+    if [ "$usb_choice" == "y" ] || [ "$usb_choice" == "Y" ]; then
+        echo "blacklist usb-storage" | sudo tee -a /etc/modprobe.d/blacklist.conf
+
+    elif [ "$usb_choice" == "n" ] || [ "$usb_choice" == "N" ]; then
+        :
+
+    else
+        echo Invalid choice...
+        disable_usb
+
+    fi
+}
+
+harden_login() {
+    echo "Harden /etc/login.defs [Y/n]?"
+    read harden_choice
+
+    if [ "$harden_choice" == "y" ] || [ "$harden_choice" == "Y" ]; then
+        sudo cp files/login.defs /etc/login.defs
+
+    elif [ "$harden_choice" == "n" ] || [ "$harden_choice" == "N" ]; then
+        :
+
+    else
+        echo Invalid choice...
+        harden_login
+
+    fi
+}
+
 
 
 
