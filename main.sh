@@ -145,7 +145,7 @@ install_ghidra() {
 
     ghidra_folder="ghidra_10.3.2_PUBLIC"
 
-    if [[ "$path" == "" ]]; then
+    if [ "$path" == "" ]; then
         :
 
     elif [ -e $path ]; then
@@ -168,7 +168,27 @@ pip3 install -r files/req3.txt
 pip install -r files/req.txt
 
 
+#security
+
+
 
 #finish
 sudo apt update
 sudo apt full-upgrade -y
+
+run_lynis() {
+    echo "Run lynis now [Y/n]?"
+    read lynis_choice
+
+    if [ "$lynis_choice" == "y" ] || [ "$lynis_choice" == "Y" ]; then
+        sudo lynis audit system
+
+    elif [ "$lynis_choice" == "n" ] || [ "$lynis_choice" == "N" ]; then
+        :
+
+    else
+        echo Invalid choice...
+        run_lynis
+
+    fi
+}
