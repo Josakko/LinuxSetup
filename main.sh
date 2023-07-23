@@ -22,17 +22,17 @@ sudo apt install tilix -y
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-cp dotfiles/.zshrc ~/.zshrc
+cp dotfiles/zshrc ~/.zshrc
 
-cp dotfiles/.bashrc ~/.bashrc
+cp dotfiles/bashrc ~/.bashrc
 sudo apt update
 
 
 #dotfiles
-cp dotfiles/.face ~/.face
-cp dotfiles/.face.icon ~/.face.icon
+cp dotfiles/face ~/.face
+cp dotfiles/face.icon ~/.face.icon
 
-cp dotfiles/.nvidia-settings-rc ~/.nvidia-settings-rc
+cp dotfiles/nvidia-settings-rc ~/.nvidia-settings-rc
 
 cp files/Josakko.code-profile ~/Documents/Josakko.code-profile
 
