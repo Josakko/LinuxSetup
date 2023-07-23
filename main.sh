@@ -206,7 +206,29 @@ harden_login() {
     fi
 }
 
+trash_emptying() {
+    echo "Schedule trash emptying on reboot [Y/n]?"
+    read trash_emptying_choice
 
+    if [ "$trash_emptying_choice" == "y" ] || [ "$trash_emptying_choice" == "Y" ]; then
+        chmod +x files/empty_trash.sh
+
+        sudo mv files/empty_trash.sh /etc/rc0.d/K01empty_trash
+        sudo mv files/empty_trash.sh /etc/rc6.d/K01empty_trash
+
+        sudo ln -s /etc/rc0.d/K01empty_trash /etc/rc0.d/K01empty_trash.sh
+        sudo ln -s /etc/rc6.d/K01empty_trash /etc/rc6.d/K01empty_trash.sh
+
+
+    elif [ "$trash_emptying_choice" == "n" ] || [ "$trash_emptying_choice" == "N" ]; then
+        :
+
+    else
+        echo Invalid choice...
+        trash_emptying
+
+    fi
+}
 
 
 #finish
