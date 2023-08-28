@@ -1,2 +1,2 @@
 # SetupScripts
-Scripts to quickly setup new linux machine
+Scripts to quickly setup new debian based machine
