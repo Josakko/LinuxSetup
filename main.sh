@@ -88,7 +88,6 @@ sudo apt install gcc -y
 sudo apt install docker -y
 sudo apt install default-jdk -y 
 sudo apt install golang -y 
-sudo apt install imhex -y
 sudo apt install ghex -y 
 sudo apt install ffmpeg -y
 sudo apt install neovim -y 
@@ -137,6 +136,8 @@ install_vs() {
     fi
 }
 
+install_vs
+
 
 #ghidra
 install_ghidra() {
@@ -163,6 +164,7 @@ install_ghidra() {
     fi
 }
 
+install_ghidra
 
 #dependecies
 sudo npm install ts-node -g
@@ -173,6 +175,37 @@ pip install -r files/req.txt
 
 
 #security
+lock_grub() {
+    echo "Set password for grub bootloader [Y/n]?"
+    read grub_choice
+
+    if [ "$grub_choice" == "y" ] || [ "$grub_choice" == "Y" ]; then
+        echo "Enter username for grub:"
+        read grub_username
+
+        echo "Enter PBKDF2 password hash for grub (use "grub-mkpasswd-pbkdf2" command):"
+        read grub_password_hash
+
+        echo "
+cat << EOF
+set superusers="$grub_username"
+password_pbkdf2 $grub_username $grub_password_hash
+EOF
+        " | sudo tee -a /etc/grub.d/00_header
+
+        sudo update-grub
+
+
+    elif [ "$grub_choice" == "n" ] || [ "$grub_choice" == "N" ]; then
+        :
+
+    else
+        echo Invalid choice...
+        lock_grub
+
+    fi
+}
+
 disable_usb() {
     echo "Disable USB driver [Y/n]?"
     read usb_choice
@@ -231,6 +264,11 @@ trash_emptying() {
     fi
 }
 
+lock_grub
+disable_usb
+harden_login
+trash_emptying
+
 
 #finish
 sudo apt update
@@ -252,3 +290,6 @@ run_lynis() {
 
     fi
 }
+
+run_lynis
+
