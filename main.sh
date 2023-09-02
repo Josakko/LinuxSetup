@@ -207,7 +207,7 @@ harden_login() {
 }
 
 trash_emptying() {
-    echo "Schedule trash emptying on reboot [Y/n]?"
+    echo "Schedule trash emptying on reboot or shutdown [Y/n]?"
     read trash_emptying_choice
 
     if [ "$trash_emptying_choice" == "y" ] || [ "$trash_emptying_choice" == "Y" ]; then
