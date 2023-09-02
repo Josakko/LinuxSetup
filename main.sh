@@ -88,6 +88,7 @@ sudo apt install gcc -y
 sudo apt install docker -y
 sudo apt install default-jdk -y 
 sudo apt install golang -y 
+sudo apt install imhex -y
 sudo apt install ghex -y 
 sudo apt install ffmpeg -y
 sudo apt install neovim -y 
