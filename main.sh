@@ -105,6 +105,7 @@ sudo apt install rustc -y
 sudo apt install apt-listbugs -y
 sudo apt install apt-listchanges -y
 sudo apt install apt-show-versions -y
+sudo apt install htop -y
 
 
 #vs code / vs codium
