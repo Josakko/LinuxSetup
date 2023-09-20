@@ -5,4 +5,4 @@ Scripts to quickly setup new debian based machine
 
 OR
 
-    git clone https://github.com/Josakko/SetupScripts.git && cd SetupScripts && main.sh
+    git clone https://github.com/Josakko/SetupScripts.git && cd SetupScripts-main && main.sh
