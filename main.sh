@@ -99,7 +99,7 @@ sudo apt install php -y
 sudo apt install openssl -y
 sudo apt install qemu -y
 sudo apt install tor torbrowser-launcher -y
-sudp apt install lynis -y
+sudo apt install lynis -y
 sudo apt install make -y
 sudo apt install ruby-full -y
 sudo apt install rustc -y
