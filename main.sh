@@ -6,7 +6,7 @@
 #  exit 1
 #fi
 
-
+path=exec pwd
 
 #repos
 #sudo cp files/sources.list /etc/apt/sources.list
@@ -249,6 +249,8 @@ harden_login() {
 trash_emptying() {
     echo "Schedule trash emptying on reboot or shutdown [Y/n]?"
     read trash_emptying_choice
+
+    cd $path
 
     if [ "$trash_emptying_choice" == "y" ] || [ "$trash_emptying_choice" == "Y" ]; then
         chmod +x files/empty_trash.sh
