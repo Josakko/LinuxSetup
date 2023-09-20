@@ -6,6 +6,7 @@
 #  exit 1
 #fi
 
+
 #repos
 #sudo cp files/sources.list /etc/apt/sources.list
 echo "deb-src http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware" | sudo tee -a /etc/modprobe.d/blacklist.conf
@@ -82,7 +83,8 @@ sudo systemctl disable ssh
 sudo apt update
 sudo apt upgrade -y
 
-sudo apt install snapd -y
+#sudo apt install snapd -y
+sudo apt install docker.io -y
 sudo apt install gcc -y 
 sudo apt install default-jdk -y 
 sudo apt install golang -y 
@@ -116,17 +118,36 @@ install_vs() {
     4. none"
     read choice
 
-    sudo systemctl start snapd.socket
-
+    #sudo systemctl start snapd.socket
+    
 
     if [[ "$choice" == "1" ]]; then
-        sudo snap install code --classic
+        #sudo snap install code --classic
+        sudo apt update
+        sudo apt install software-properties-common apt-transport-https
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg –dearmor > packages.microsoft.gpg
+        sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+        sudo sh -c ‘echo “deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repo vscode stable main” > /etc/apt/sources.list.d/vscode.list’
+        sudo apt update
+        sudo apt install code
+
 
     elif [[ "$choice" == "2" ]]; then
+        sudo apt install snapd -y
+        sudo systemctl start snapd.socket
         sudo snap install codium --classic
 
     elif [[ "$choice" == "3" ]]; then
-        sudo snap install code --classic
+        #sudo snap install code --classic
+        sudo apt update
+        sudo apt install software-properties-common apt-transport-https
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg –dearmor > packages.microsoft.gpg
+        sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+        sudo sh -c ‘echo “deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repo vscode stable main” > /etc/apt/sources.list.d/vscode.list’
+        sudo apt update
+        sudo apt install code
+
+        sudo apt install snapd -y
         sudo snap install codium --classic
 
     elif [[ "$choice" == "4" ]]; then
