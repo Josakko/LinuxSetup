@@ -255,8 +255,8 @@ trash_emptying() {
     if [ "$trash_emptying_choice" == "y" ] || [ "$trash_emptying_choice" == "Y" ]; then
         chmod +x files/empty_trash.sh
 
-        sudo mv files/empty_trash.sh /etc/rc0.d/K01empty_trash
-        sudo mv files/empty_trash.sh /etc/rc6.d/K01empty_trash
+        sudo cp files/empty_trash.sh /etc/rc0.d/K01empty_trash
+        sudo cp files/empty_trash.sh /etc/rc6.d/K01empty_trash
 
         sudo ln -s /etc/rc0.d/K01empty_trash /etc/rc0.d/K01empty_trash.sh
         sudo ln -s /etc/rc6.d/K01empty_trash /etc/rc6.d/K01empty_trash.sh
@@ -300,7 +300,7 @@ run_lynis() {
 }
 
 run_lynis
-
+#files/empty_trash.sh
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
