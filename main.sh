@@ -1,15 +1,16 @@
 #!/bin/bash
 
 
-if [ "$EUID" -ne 0 ]; then
-  echo "This script must be run as root!"
-  exit 1
-fi
+#if [ "$EUID" -ne 0 ]; then
+#  echo "This script must be run as root!"
+#  exit 1
+#fi
 
 
 
 #repos
-sudo cp files/sources.list /etc/apt/sources.list
+#sudo cp files/sources.list /etc/apt/sources.list
+echo "deb-src http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware" | sudo tee -a /etc/modprobe.d/blacklist.conf
 
 sudo apt update
 sudo apt full-upgrade -y
@@ -61,17 +62,17 @@ sudo cp images/grub/grub-16x9.png /usr/share/images/desktop-base/desktop-grub.pn
 
 
 #docker
-sudo apt update
-
-sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-
-sudo apt install docker-ce docker-ce-cli containerd.io -y
-sudo systemctl start docker
-sudo docker --version
-sudo systemctl stop docker
+#sudo apt update
+#
+#sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+#curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#sudo apt update
+#
+#sudo apt install docker-ce docker-ce-cli containerd.io -y
+#sudo systemctl start docker
+#sudo docker --version
+#sudo systemctl stop docker
 
 
 #ssh server
@@ -85,7 +86,6 @@ sudo apt upgrade -y
 
 sudo apt install snapd -y
 sudo apt install gcc -y 
-sudo apt install docker -y
 sudo apt install default-jdk -y 
 sudo apt install golang -y 
 sudo apt install ghex -y 
@@ -93,6 +93,7 @@ sudo apt install ffmpeg -y
 sudo apt install neovim -y 
 sudo apt install obs-studio -y
 sudo apt install nodejs -y
+sudo apt install npm -y
 sudo apt install lua5.3 -y
 sudo apt install php -y
 sudo apt install openssl -y
@@ -116,6 +117,8 @@ install_vs() {
     3. both
     4. none"
     read choice
+
+    sudo systemctl start snapd.socket
 
 
     if [[ "$choice" == "1" ]]; then
@@ -146,8 +149,8 @@ install_ghidra() {
     #echo Enter path to downloaded file or leave empty to skip ghidra installation...
     #read path
     
-    wget -O ~/Downloads/ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.3.2_build/ghidra_10.3.2_PUBLIC_20230711.zip
-    path=~/Downloads/ghidra.zip
+    wget -O /home/ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.3.2_build/ghidra_10.3.2_PUBLIC_20230711.zip
+    path=/home/ghidra.zip
 
     ghidra_folder="ghidra_10.3.2_PUBLIC"
 
@@ -159,13 +162,15 @@ install_ghidra() {
         sudo mv /usr/share/$ghidra_folder /usr/share/ghidra
 
     else
-        echo Invalid path!
-        install_ghidra
+        #echo Invalid path!
+        #install_ghidra
+        :
 
     fi
 }
 
 install_ghidra
+
 
 #dependecies
 sudo npm install ts-node -g
