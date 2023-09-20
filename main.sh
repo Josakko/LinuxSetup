@@ -149,7 +149,7 @@ install_ghidra() {
     #echo Enter path to downloaded file or leave empty to skip ghidra installation...
     #read path
     
-    wget -O /home/ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.3.2_build/ghidra_10.3.2_PUBLIC_20230711.zip
+    sudo wget -O /home/ghidra.zip https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.3.2_build/ghidra_10.3.2_PUBLIC_20230711.zip
     path=/home/ghidra.zip
 
     ghidra_folder="ghidra_10.3.2_PUBLIC"
