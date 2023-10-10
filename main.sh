@@ -90,6 +90,7 @@ sudo apt update
 sudo apt upgrade -y
 
 #sudo apt install snapd -y
+sudo apt install gradle -y
 sudo apt install docker.io -y
 sudo apt install gcc -y 
 sudo apt install default-jdk -y 
